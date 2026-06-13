@@ -1,84 +1,422 @@
-<!DOCTYPE html>
-<html lang="ur">
+            <!DOCTYPE html>
+<html lang="ur" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>50 Mashhoor Hadees</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <title>50 Mashhoor Hadees - Search</title>
     <style>
-        body { font-family: 'Noto Nastaliq Urdu', Arial; background: #f0f4f0; padding: 15px; margin: 0; }
-        .container { max-width: 800px; margin: auto; }
-        .hadees { background: white; padding: 20px; margin: 15px 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-right: 5px solid #1a5f1a; }
-        .arbi { font-size: 26px; text-align: right; color: #1a5f1a; margin: 12px 0; line-height: 1.8; }
-        .tarjuma { font-size: 18px; color: #333; line-height: 1.7; }
-        .key { font-weight: 700; color: #0d47a1; font-size: 20px; }
-        h1 { text-align: center; color: #1a5f1a; margin: 20px 0; }
-        .footer { text-align: center; margin: 30px 0; color: #666; }
+        body {
+            font-family: 'Jameel Noori Nastaleeq', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: linear-gradient(rgba(240, 248, 240, 0.9), rgba(240, 248, 240, 0.9)), url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+     .ilham-tag {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%) rotate(-90deg);
+            background: #0a5c36;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 0 0 10px 10px;
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+     .header {
+            text-align: center;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #0a5c36;
+        }
+        h1 {
+            color: #0a5c36;
+            margin: 5px 0;
+        }
+     .credit {
+            font-size: 14px;
+            color: #333;
+            margin: 5px 0;
+        }
+        #searchBox {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #0a5c36;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-sizing: border-box;
+            background: white;
+        }
+     .hadees {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #0a5c36;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+     .title {
+            color: #1a73e8;
+            font-weight: bold;
+            font-size: 20px;
+        }
+     .arabic {
+            font-size: 22px;
+            color: #0a5c36;
+            margin: 10px 0;
+            direction: rtl;
+        }
+     .hidden {
+            display: none;
+        }
+     .footer {
+            text-align: center;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 30px;
+            font-size: 14px;
+            border: 2px solid #0a5c36;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="ilham-tag">الہام</div>
+
+    <div class="header">
         <h1>50 Mashhoor Hadees Ma Tarjuma</h1>
-        <div id="hadees-list"></div>
-        <div class="footer">Sadaqah Jariyah</div>
+        <div class="credit"><b>Website Banai:</b> Haramain Elahi</div>
+        <div class="credit"><b>Data Review:</b> Zobia Binte Imran</div>
     </div>
+
+    <input type="text" id="searchBox" placeholder="Hadees search karen... Niyyat, Namaz, Roza likhen" onkeyup="searchHadees()">
+
+    <div id="hadeesList">
+        <div class="hadees">
+            <div class="title">1. Niyyat</div>
+            <div class="arabic">إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى</div>
+            <div>Aamaal ka daromadar niyyaton par hai, aur har shakhs ke liye wahi hai jis ki us ne niyyat ki. Bukhari 1</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">2. Islam Ke Arkaan</div>
+            <div class="arabic">بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ</div>
+            <div>Islam ki bunyad 5 cheezon par hai: Kalma, Namaz, Roza, Zakat, Hajj. Bukhari 8</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">3. Walidain Ka Haq</div>
+            <div class="arabic">رِضَى الرَّبِّ فِي رِضَى الْوَالِدِ، وَسَخَطُ الرَّبِّ فِي سَخَطِ الْوَالِدِ</div>
+            <div>Allah ki raza walid ki raza mein hai aur Allah ka gussa walid ke gusse mein hai. Tirmizi 1899</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">4. Padosi Ka Haq</div>
+            <div class="arabic">مَا زَالَ جِبْرِيلُ يُوصِينِي بِالْجَارِ حَتَّى ظَنَنْتُ أَنَّهُ سَيُوَرِّثُهُ</div>
+            <div>Jibraeel A.S mujhe padosi ke baare mein wasiyat karte rahe yahan tak ke maine gumaan kiya ke wo usay waaris bana denge. Bukhari 6014</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">5. Musalman Bhai</div>
+            <div class="arabic">الْمُسْلِمُ أَخُو الْمُسْلِمِ لاَ يَظْلِمُهُ وَلاَ يُسْلِمُهُ</div>
+            <div>Musalman musalman ka bhai hai, na us par zulm karta hai na usay dushman ke hawale karta hai. Bukhari 2442</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">6. Safai Nisf Imaan</div>
+            <div class="arabic">الطُّهُورُ شَطْرُ الإِيمَانِ</div>
+            <div>Safai nisf imaan hai. Muslim 223</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">7. Haya Imaan Ka Hissa</div>
+            <div class="arabic">الْحَيَاءُ شُعْبَةٌ مِنَ الإِيمَانِ</div>
+            <div>Haya imaan ka ek hissa hai. Bukhari 9</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">8. Duniya Momin Ka Qaid Khana</div>
+            <div class="arabic">الدُّنْيَا سِجْنُ الْمُؤْمِنِ وَجَنَّةُ الْكَافِرِ</div>
+            <div>Duniya momin ka qaid khana aur kafir ki jannat hai. Muslim 2956</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">9. Behtareen Log</div>
+            <div class="arabic">خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ</div>
+            <div>Tum mein behtareen wo hai jo Quran seekhe aur sikhaye. Bukhari 5027</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">10. Maa Ke Qadmon Tale Jannat</div>
+            <div class="arabic">الْجَنَّةُ تَحْتَ أَقْدَامِ الأُمَّهَاتِ</div>
+            <div>Jannat maaon ke qadmon ke neeche hai. Nasai 3104</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">11. Gussa Na Karo</div>
+            <div class="arabic">لاَ تَغْضَبْ</div>
+            <div>Gussa na karo. Bukhari 6116</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">12. Sachai Aur Jhoot</div>
+            <div class="arabic">عَلَيْكُمْ بِالصِّدْقِ، فَإِنَّ الصِّدْقَ يَهْدِي إِلَى الْبِرِّ</div>
+            <div>Sachai ikhtiyar karo, kyunki sachai neki ki taraf le jati hai. Bukhari 6094</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">13. Yateem Ka Maal</div>
+            <div class="arabic">أَنَا وَكَافِلُ الْيَتِيمِ فِي الْجَنَّةِ هَكَذَا</div>
+            <div>Main aur yateem ki kafalat karne wala jannat mein is tarah honge. Bukhari 5304</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">14. Ilm Hasil Karna</div>
+            <div class="arabic">طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ</div>
+            <div>Ilm hasil karna har musalman par farz hai. Ibn Majah 224</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">15. Muskurahat Sadqa</div>
+            <div class="arabic">تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ لَكَ صَدَقَةٌ</div>
+            <div>Apne bhai ke saamne muskurana sadqa hai. Tirmizi 1956</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">16. Khaane Ke Aadaab</div>
+            <div class="arabic">يَا غُلاَمُ سَمِّ اللَّهَ، وَكُلْ بِيَمِينِكَ، وَكُلْ مِمَّا يَلِيكَ</div>
+            <div>Ae bache! Allah ka naam lo, dayen haath se khao, aur apne saamne se khao. Bukhari 5376</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">17. Sab Se Behtar Akhlaq</div>
+            <div class="arabic">إِنَّ مِنْ خِيَارِكُمْ أَحْسَنَكُمْ أَخْلاَقًا</div>
+            <div>Tum mein sab se behtar wo hai jis ka akhlaq sab se acha hai. Bukhari 3559</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">18. Salam Aam Karo</div>
+            <div class="arabic">أَفْشُوا السَّلاَمَ بَيْنَكُمْ</div>
+            <div>Aapas mein salam ko aam karo. Muslim 54</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">19. Rehmat Ka Muamla</div>
+            <div class="arabic">الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ</div>
+            <div>Rehm karne walon par Rehman rehm karta hai. Tirmizi 1924</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">20. Zuban Ki Hifazat</div>
+            <div class="arabic">مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ</div>
+            <div>Jo Allah aur aakhirat par imaan rakhta hai wo achi baat kahe ya khamosh rahe. Bukhari 6018</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">21. Halaal Rozi</div>
+            <div class="arabic">مَا أَكَلَ أَحَدٌ طَعَامًا قَطُّ خَيْرًا مِنْ أَنْ يَأْكُلَ مِنْ عَمَلِ يَدِهِ</div>
+            <div>Kisi ne apne haath ki kamai se behtar khana kabhi nahi khaya. Bukhari 2072</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">22. Jhoot Se Bacho</div>
+            <div class="arabic">وَإِيَّاكُمْ وَالْكَذِبَ، فَإِنَّ الْكَذِبَ يَهْدِي إِلَى الْفُجُورِ</div>
+            <div>Jhoot se bacho, kyunki jhoot gunah ki taraf le jata hai. Muslim 2607</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">23. Shukr Guzari</div>
+            <div class="arabic">مَنْ لَمْ يَشْكُرِ النَّاسَ لَمْ يَشْكُرِ اللَّهَ</div>
+            <div>Jo logon ka shukr ada nahi karta wo Allah ka shukr bhi ada nahi karta. Tirmizi 1954</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">24. Dozakh Se Bachao</div>
+            <div class="arabic">اتَّقُوا النَّارَ وَلَوْ بِشِقِّ تَمْرَةٍ</div>
+            <div>Aag se bacho chahe khajoor ka ek tukda de kar hi sahi. Bukhari 1417</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">25. Walidain Ki Khidmat</div>
+            <div class="arabic">جَاءَ رَجُلٌ إِلَى النَّبِيِّ صلى الله عليه وسلم فَقَالَ مَنْ أَحَقُّ النَّاسِ بِحُسْنِ صَحَابَتِي قَالَ أُمُّكَ</div>
+            <div>Ek shakhs ne poocha mere husn-e-sulook ka sab se zyada haqdaar kaun hai? Farmaya: Tumhari Maa. Bukhari 5971</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">26. Geebat Se Bacho</div>
+            <div class="arabic">أَتَدْرُونَ مَا الْغِيبَةُ قَالُوا اللَّهُ وَرَسُولُهُ أَعْلَمُ قَالَ ذِكْرُكَ أَخَاكَ بِمَا يَكْرَهُ</div>
+            <div>Jante ho geebat kya hai? Apne bhai ka zikr is tarah karna jo use napasand ho. Muslim 2589</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">27. Sabr Ka Phal</div>
+            <div class="arabic">مَا أُعْطِيَ أَحَدٌ عَطَاءً خَيْرًا وَأَوْسَعَ مِنَ الصَّبْرِ</div>
+            <div>Kisi ko sabr se behtar aur wasee ataa nahi di gayi. Bukhari 1469</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">28. Qarz Ki Adaigi</div>
+            <div class="arabic">مَطْلُ الْغَنِيِّ ظُلْمٌ</div>
+            <div>Maaldar ka qarz ada karne mein taal matol karna zulm hai. Bukhari 2287</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">29. Raaste Ka Haq</div>
+            <div class="arabic">إِيَّاكُمْ وَالْجُلُوسَ عَلَى الطُّرُقَاتِ</div>
+            <div>Raaston pe baithne se bacho. Bukhari 2465</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">30. Hadees e Jibreel</div>
+            <div class="arabic">الإِسْلاَمُ أَنْ تَشْهَدَ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ</div>
+            <div>Islam ye hai ke tu gawahi de ke Allah ke siwa koi mabood nahi aur Muhammad ﷺ Allah ke Rasool hain. Muslim 8</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">31. Mohabbat Ka Mayaar</div>
+            <div class="arabic">لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ</div>
+            <div>Tum mein se koi momin nahi ho sakta jab tak apne bhai ke liye wahi pasand na kare jo apne liye pasand karta hai. Bukhari 13</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">32. Zameen Par Rehm</div>
+            <div class="arabic">ارْحَمُوا مَنْ فِي الأَرْضِ يَرْحَمْكُمْ مَنْ فِي السَّمَاءِ</div>
+            <div>Zameen walon par rehm karo, Aasman wala tum par rehm karega. Tirmizi 1924</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">33. Jhooti Gawahi</div>
+            <div class="arabic">أَلاَ وَقَوْلُ الزُّورِ</div>
+            <div>Khabardar! Jhooti baat aur jhooti gawahi. Bukhari 2654</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">34. Narmi Ka Hukum</div>
+            <div class="arabic">إِنَّ اللَّهَ رَفِيقٌ يُحِبُّ الرِّفْقَ فِي الأَمْرِ كُلِّهِ</div>
+            <div>Allah narm hai aur har kaam mein narmi ko pasand karta hai. Bukhari 6024</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">35. Bimar Pursi</div>
+            <div class="arabic">حَقُّ الْمُسْلِمِ عَلَى الْمُسْلِمِ خَمْسٌ</div>
+            <div>Musalman ka musalman par 5 haq hain: Salam ka jawab, Bimar pursi, Janaza ke saath jana, Dawat qubool karna, Cheenk ka jawab dena. Bukhari 1240</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">36. Maa Baap Ki Nafarmani</div>
+            <div class="arabic">أَلاَ أُنَبِّئُكُمْ بِأَكْبَرِ الْكَبَائِرِ قَالُوا بَلَى يَا رَسُولَ اللَّهِ قَالَ الإِشْرَاكُ بِاللَّهِ، وَعُقُوقُ الْوَالِدَيْنِ</div>
+            <div>Kya main tumhe sab se bade gunah na bataun? Allah ke saath shirk karna aur walidain ki nafarmani. Bukhari 2654</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">37. Wada Khilafi</div>
+            <div class="arabic">آيَةُ الْمُنَافِقِ ثَلاَثٌ إِذَا حَدَّثَ كَذَبَ، وَإِذَا وَعَدَ أَخْلَفَ، وَإِذَا اؤْتُمِنَ خَانَ</div>
+            <div>Munafiq ki 3 nishaniyan hain: Jab baat kare jhoot bole, wada kare to khilaf warzi kare, amanat rakhi jaye to khayanat kare. Bukhari 33</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">38. Zulm Se Bacho</div>
+            <div class="arabic">اتَّقُوا الظُّلْمَ، فَإِنَّ الظُّلْمَ ظُلُمَاتٌ يَوْمَ الْقِيَامَةِ</div>
+            <div>Zulm se bacho, kyunki zulm Qayamat ke din andheriyan hongi. Muslim 2578</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">39. Roza Dhaal Hai</div>
+            <div class="arabic">الصِّيَامُ جُنَّةٌ</div>
+            <div>Roza dhaal hai. Bukhari 1894</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">40. Jannat Ki Zamanat</div>
+            <div class="arabic">مَنْ يَضْمَنْ لِي مَا بَيْنَ لَحْيَيْهِ وَمَا بَيْنَ رِجْلَيْهِ أَضْمَنْ لَهُ الْجَنَّةَ</div>
+            <div>Jo mujhe apni zuban aur sharmgah ki hifazat ki zamanat de, main usay jannat ki zamanat deta hun. Bukhari 6474</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">41. Aasaniyan Paida Karo</div>
+            <div class="arabic">يَسِّرُوا وَلاَ تُعَسِّرُوا، وَبَشِّرُوا وَلاَ تُنَفِّرُوا</div>
+            <div>Aasaniyan paida karo, mushkil na banao. Khushkhabri do, nafrat na dilao. Bukhari 69</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">42. Hasad Se Bacho</div>
+            <div class="arabic">إِيَّاكُمْ وَالْحَسَدَ، فَإِنَّ الْحَسَدَ يَأْكُلُ الْحَسَنَاتِ كَمَا تَأْكُلُ النَّارُ الْحَطَبَ</div>
+            <div>Hasad se bacho, kyunki hasad nekiyon ko is tarah kha jata hai jaise aag lakri ko. Abu Dawood 4903</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">43. Aurat Se Acha Sulook</div>
+            <div class="arabic">اسْتَوْصُوا بِالنِّسَاءِ خَيْرًا</div>
+            <div>Auraton ke baare mein bhalai ki wasiyat qubool karo. Bukhari 5186</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">44. Fajr Ki Namaz</div>
+            <div class="arabic">مَنْ صَلَّى الصُّبْحَ فَهُوَ فِي ذِمَّةِ اللَّهِ</div>
+            <div>Jis ne Fajr ki namaz padhi wo Allah ki hifazat mein hai. Muslim 657</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">45. Sadqa Gunaah Mitata Hai</div>
+            <div class="arabic">الصَّدَقَةُ تُطْفِئُ الْخَطِيئَةَ كَمَا يُطْفِئُ الْمَاءُ النَّارَ</div>
+            <div>Sadqa gunahon ko is tarah bujha deta hai jaise pani aag ko. Tirmizi 614</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">46. Behtareen Sadqa</div>
+            <div class="arabic">أَفْضَلُ الصَّدَقَةِ أَنْ تُشْبِعَ كَبِدًا جَائِعًا</div>
+            <div>Sab se behtar sadqa bhooke ko khana khilana hai. Bayhaqi</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">47. Rishtay Jorna</div>
+            <div class="arabic">لَيْسَ الْوَاصِلُ بِالْمُكَافِئِ، وَلَكِنِ الْوَاصِلُ الَّذِي إِذَا قُطِعَتْ رَحِمُهُ وَصَلَهَا</div>
+            <div>Sila rehmi karne wala wo nahi jo badle mein sila rehmi kare, balke wo hai ke jab us se rishta tora jaye to wo jore. Bukhari 5991</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">48. Dua Ibadat Hai</div>
+            <div class="arabic">الدُّعَاءُ هُوَ الْعِبَادَةُ</div>
+            <div>Dua hi ibadat hai. Tirmizi 2969</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">49. Deen Aasan Hai</div>
+            <div class="arabic">إِنَّ الدِّينَ يُسْرٌ</div>
+            <div>Beshak deen aasan hai. Bukhari 39</div>
+        </div>
+
+        <div class="hadees">
+            <div class="title">50. Momin Ka Muamla</div>
+            <div class="arabic">عَجَبًا لأَمْرِ الْمُؤْمِنِ إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ</div>
+            <div>Momin ka muamla ajab hai, us ka har kaam khair hai. Agar khushi mile to shukr karta hai, takleef aaye to sabr karta hai. Muslim 2999</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <b>Website Banai:</b> Haramain Elahi | <b>Data Review:</b> Zobia Binte Imran
+    </div>
+
     <script>
-        const hadees_data = [
-            {"key": "1. Niyyat", "hadees": "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى", "tarjuma": "Aamaal ka daromadar niyyaton par hai, aur har shakhs ke liye wahi hai jis ki us ne niyyat ki"},
-            {"key": "2. Islam Ke Arkaan", "hadees": "بُنِيَ الْإِسْلَامُ عَلَى خَمْسٍ", "tarjuma": "Islam ki bunyad 5 cheezon par hai: Kalma, Namaz, Zakat, Hajj, Roza"},
-            {"key": "3. Musalman Ki Pehchan", "hadees": "الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ", "tarjuma": "Musalman woh hai jis ki zuban aur haath se doosre musalman mehfooz rahen"},
-            {"key": "4. Kamil Imaan", "hadees": "لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ", "tarjuma": "Tum mein se koi momin nahi ho sakta jab tak apne bhai ke liye wahi pasand na kare jo apne liye pasand karta hai"},
-            {"key": "5. Haya", "hadees": "الْحَيَاءُ مِنَ الْإِيمَانِ", "tarjuma": "Haya imaan ka hissa hai"},
-            {"key": "6. Deen Asaan Hai", "hadees": "إِنَّ الدِّينَ يُسْرٌ", "tarjuma": "Beshak deen asaan hai"},
-            {"key": "7. Ilm Farz Hai", "hadees": "طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ", "tarjuma": "Ilm hasil karna har musalman par farz hai"},
-            {"key": "8. Sachayi", "hadees": "عَلَيْكُمْ بِالصِّدْقِ", "tarjuma": "Sach ko lazim pakro, sach neki ki taraf le jata hai"},
-            {"key": "9. Muskurahat", "hadees": "تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ لَكَ صَدَقَةٌ", "tarjuma": "Apne bhai ke samne muskurana bhi sadqa hai"},
-            {"key": "10. Salam Aam Karo", "hadees": "أَفْشُوا السَّلَامَ بَيْنَكُمْ", "tarjuma": "Apas mein salam ko aam karo"},
-            {"key": "11. Sabr", "hadees": "عَجَبًا لِأَمْرِ الْمُؤْمِنِ", "tarjuma": "Momin ka mamla ajab hai, us ka har kaam khair hai"},
-            {"key": "12. Maa Ka Darja", "hadees": "الْجَنَّةُ تَحْتَ أَقْدَامِ الْأُمَّهَاتِ", "tarjuma": "Jannat maaon ke qadmon tale hai"},
-            {"key": "13. Dua Ibadat Hai", "hadees": "الدُّعَاءُ هُوَ الْعِبَادَةُ", "tarjuma": "Dua hi ibadat hai"},
-            {"key": "14. Quran Sikhana", "hadees": "خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ", "tarjuma": "Tum mein behtareen woh hai jo Quran seekhe aur sikhaye"},
-            {"key": "15. Tauba", "hadees": "كُلُّ ابْنِ آدَمَ خَطَّاءٌ", "tarjuma": "Har insan khatakar hai, aur behtareen khatakar tauba karne wale hain"},
-            {"key": "16. Allah Ki Rehmat", "hadees": "إِنَّ رَحْمَتِي سَبَقَتْ غَضَبِي", "tarjuma": "Meri rehmat mere ghazab par sabqat le gayi hai"},
-            {"key": "17. Jahannam Se Bachao", "hadees": "اتَّقُوا النَّارَ وَلَوْ بِشِقِّ تَمْرَةٍ", "tarjuma": "Jahannam se bacho chahay khajoor ke ek tukre se hi"},
-            {"key": "18. Narmi", "hadees": "إِنَّ اللَّهَ رَفِيقٌ يُحِبُّ الرِّفْقَ", "tarjuma": "Allah naram hai aur har kaam mein narmi ko pasand karta hai"},
-            {"key": "19. Sadaqah", "hadees": "الصَّدَقَةُ تُطْفِئُ الْخَطِيئَةَ", "tarjuma": "Sadqa gunah ko is tarah bujha deta hai jaise pani aag ko"},
-            {"key": "20. Walidain Ki Raza", "hadees": "رِضَا الرَّبِّ فِي رِضَا الْوَالِدِ", "tarjuma": "Rab ki raza walid ki raza mein hai"},
-            {"key": "21. Yateem Ki Kafalat", "hadees": "أَنَا وَكَافِلُ الْيَتِيمِ فِي الْجَنَّةِ هَكَذَا", "tarjuma": "Main aur yateem ki kafalat karne wala jannat mein is tarah honge"},
-            {"key": "22. Padosi Ka Haq", "hadees": "مَا زَالَ جِبْرِيلُ يُوصِينِي بِالْجَارِ", "tarjuma": "Jibreel mujhe padosi ke baare mein waseeat karte rahe yahan tak ke mujhe laga ke use waris bana denge"},
-            {"key": "23. Khana Khilana", "hadees": "أَطْعِمُوا الطَّعَامَ", "tarjuma": "Khana khilao, salam aam karo, aur raat ko jab log so rahe hon namaz parho to jannat mein salaamati se dakhil hoge"},
-            {"key": "24. Gheebat", "hadees": "أَتَدْرُونَ مَا الْغِيبَةُ", "tarjuma": "Kya tum jante ho gheebat kya hai? Apne bhai ka zikr is tarah karna jo use napasand ho"},
-            {"key": "25. Hasad", "hadees": "إِيَّاكُمْ وَالْحَسَدَ", "tarjuma": "Hasad se bacho, kyunki hasad nekiyon ko is tarah kha jata hai jaise aag lakri ko"},
-            {"key": "26. Gussa", "hadees": "لَا تَغْضَبْ", "tarjuma": "Gussa na karo. Ek shakhs ne naseehat maangi to farmaya: Gussa na karo"},
-            {"key": "27. Mazloom Ki Baddua", "hadees": "اتَّقُوا دَعْوَةَ الْمَظْلُومِ", "tarjuma": "Mazloom ki baddua se bacho, us ke aur Allah ke darmiyan koi parda nahi"},
-            {"key": "28. Aasaniyan Paida Karo", "hadees": "يَسِّرُوا وَلَا تُعَسِّرُوا", "tarjuma": "Aasaniyan paida karo, mushkilat na paida karo. Khushkhabri do, nafrat na dilao"},
-            {"key": "29. Wafaadari", "hadees": "آيَةُ الْمُنَافِقِ ثَلَاثٌ", "tarjuma": "Munafiq ki 3 nishaniyan: jab baat kare jhoot bole, wada kare to khilaf warzi kare, amaanat rakhi jaye to khayanat kare"},
-            {"key": "30. Halal Kamaai", "hadees": "طَلَبُ الْحَلَالِ فَرِيضَةٌ", "tarjuma": "Halal rozi talab karna farz hai"},
-            {"key": "31. Zulm", "hadees": "اتَّقُوا الظُّلْمَ", "tarjuma": "Zulm se bacho, kyunki zulm qayamat ke din andheriyan hoga"},
-            {"key": "32. Rizq Ki Kunjiyan", "hadees": "لَوْ أَنَّكُمْ تَتَوَكَّلُونَ عَلَى اللَّهِ حَقَّ تَوَكُّلِهِ", "tarjuma": "Agar tum Allah par bharosa karo jaisa bharosa karne ka haq hai, to woh tumhein is tarah rizq dega jaise parindon ko deta hai"},
-            {"key": "33. Behtareen Log", "hadees": "خِيَارُكُمْ أَحَاسِنُكُمْ أَخْلَاقًا", "tarjuma": "Tum mein behtareen woh hain jin ke akhlaq sab se achay hain"},
-            {"key": "34. Momin Ka Aina", "hadees": "الْمُؤْمِنُ مِرْآةُ الْمُؤْمِنِ", "tarjuma": "Momin momin ka aina hai"},
-            {"key": "35. Zuban Ki Hifazat", "hadees": "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ", "tarjuma": "Jo Allah aur akhirat par imaan rakhta ho, woh achi baat kahe ya khamosh rahe"},
-            {"key": "36. Allah Ka Zikr", "hadees": "مَثَلُ الَّذِي يَذْكُرُ رَبَّهُ وَالَّذِي لَا يَذْكُرُ", "tarjuma": "Jo apne Rab ko yaad karta hai aur jo nahi karta, un ki misaal zinda aur murda ki si hai"},
-            {"key": "37. Namaz", "hadees": "الْعَهْدُ الَّذِي بَيْنَنَا وَبَيْنَهُمُ الصَّلَاةُ", "tarjuma": "Hamare aur un ke darmiyan ahd namaz hai, jis ne ise chhor diya us ne kufr kiya"},
-            {"key": "38. Beemari Ka Kafara", "hadees": "مَا يُصِيبُ الْمُسْلِمَ مِنْ نَصَبٍ وَلَا وَصَبٍ", "tarjuma": "Musalman ko jo thakawat, beemari, gham, takleef pahunchti hai, yahan tak ke kaanta bhi chubhe, Allah us ke zariye us ke gunah mita deta hai"},
-            {"key": "39. Shukr", "hadees": "مَنْ لَمْ يَشْكُرِ النَّاسَ لَمْ يَشْكُرِ اللَّهَ", "tarjuma": "Jo logon ka shukr ada nahi karta, woh Allah ka shukr ada nahi karta"},
-            {"key": "40. Qana'at", "hadees": "لَيْسَ الْغِنَى عَنْ كَثْرَةِ الْعَرَضِ", "tarjuma": "Maaldaari maal ki kasrat se nahi, asal maaldaari dil ki be-niyazi hai"},
-            {"key": "41. Jannat Ka Rasta", "hadees": "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا", "tarjuma": "Jo ilm ke raste par chalta hai, Allah us ke liye jannat ka rasta aasan kar deta hai"},
-            {"key": "42. Nek Aamaal", "hadees": "أَحَبُّ الْأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ", "tarjuma": "Allah ko sab se zyada mehboob woh amal hai jo hamesha kiya jaye, agarche kam ho"},
-            {"key": "43. Rizq Mein Barakat", "hadees": "مَنْ أَحَبَّ أَنْ يُبْسَطَ لَهُ فِي رِزْقِهِ", "tarjuma": "Jo chahta hai ke us ka rizq kushada ho aur umar daraz ho, woh sila rehmi kare"},
-            {"key": "44. Takabbur", "hadees": "لَا يَدْخُلُ الْجَنَّةَ مَنْ كَانَ فِي قَلْبِهِ مِثْقَالُ ذَرَّةٍ مِنْ كِبْرٍ", "tarjuma": "Jis ke dil mein zarra barabar takabbur hoga, woh jannat mein dakhil nahi hoga"},
-            {"key": "45. Neki Ka Irada", "hadees": "مَنْ هَمَّ بِحَسَنَةٍ فَلَمْ يَعْمَلْهَا", "tarjuma": "Jo neki ka irada kare aur na kar sake, us ke liye ek neki likh di jati hai"},
-            {"key": "46. Duniya Se Be-raghbati", "hadees": "كُنْ فِي الدُّنْيَا كَأَنَّكَ غَرِيبٌ", "tarjuma": "Duniya mein is tarah raho jaise tum musafir ya raahgeer ho"},
-            {"key": "47. Haqeeqi Pehlwan", "hadees": "لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ", "tarjuma": "Taakatwar woh nahi jo pachar de, taakatwar woh hai jo gusse ke waqt apne aap par qabu rakhay"},
-            {"key": "48. Humsaya Se Husn-e-Salook", "hadees": "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيُكْرِمْ جَارَهُ", "tarjuma": "Jo Allah aur akhirat par imaan rakhta ho, woh apne padosi ki izzat kare"},
-            {"key": "49. Tark-e-Laa Yani", "hadees": "مِنْ حُسْنِ إِسْلَامِ الْمَرْءِ تَرْكُهُ مَا لَا يَعْنِيهِ", "tarjuma": "Insan ke islam ki khoobi ye hai ke woh laa yani baaton ko chhor de"},
-            {"key": "50. Aakhri Naseehat", "hadees": "قُلْ آمَنْتُ بِاللَّهِ ثُمَّ اسْتَقِمْ", "tarjuma": "Kaho: Main Allah par imaan laya, phir is par isteqamat ikhtiyar karo"}
-        ];
-        const list = document.getElementById('hadees-list');
-        hadees_data.forEach(h => {
-            list.innerHTML += `<div class="hadees"><div class="key">${h.key}</div><div class="arbi">${h.hadees}</div><div class="tarjuma">${h.tarjuma}</div></div>`;
-        });
+        function searchHadees() {
+            let input = document.getElementById('searchBox').value.toLowerCase();
+            let hadees = document.getElementsByClassName('hadees');
+
+            for (let i = 0; i < hadees.length; i++) {
+                let text = hadees[i].innerText.toLowerCase();
+                if (text.includes(input)) {
+                    hadees[i].classList.remove('hidden');
+                } else {
+                    hadees[i].classList.add('hidden');
+                }
+            }
+        }
     </script>
 </body>
-</html>
+                </html>
